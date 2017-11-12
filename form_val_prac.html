@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Recruitment form</title>
+	<link rel="stylesheet"  href="wtl_potdar/css/bootstrap.min.css">
+	<script src="wtl_potdar/js/jquery.js"></script>
+	<script src="wtl_potdar/js/bootstrap.min.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			$("#err_name").hide();
+			$("#err_email").hide();
+			$("#err_pass").hide();
+			$("#err_re_pass").hide();
+
+			var name=document.getElementById('txtName').value;
+			var email=document.getElementById('txtEmail').value;
+			var pass=document.getElementById('txtPass').value;
+			var repass=document.getElementById('txtrePass').value;
+
+			$('#txtName').focusout(function(){
+				checkName();
+				
+			});
+			$('#txtName').focusin(function(){
+				$("#err_name").hide();
+				
+			});
+
+			$('#txtPass').focusout(function(){
+				checkPass();
+			});
+			$('#txtPass').focusin(function(){
+				$("#err_pass").hide();
+			});
+
+			$('#txtrePass').focusout(function(){
+				checkrepass();
+			});
+			$('#txtrePass').focusin(function(){
+				$("#err_re_pass").hide();
+			});
+
+			$('#reg').submit(function(){
+				if(checkName() && checkPass() && checkrepass()){
+					var name=document.getElementById('txtName').value;
+			var email=document.getElementById('txtEmail').value;
+			var pass=document.getElementById('txtPass').value;
+			var repass=document.getElementById('txtrePass').value;
+					alert(name);
+				}
+				else{
+					alert("form not filled correct");
+				}
+			});
+
+			function checkName(){
+				var len=$("#txtName").val().length;
+				if(len<3){
+					$("#err_name").show();
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+
+			function checkPass(){
+				var len=$("#txtPass").val().length;
+				if(len<6){
+					$("#err_pass").show();
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+
+			function checkrepass(){
+				var len=$("#txtrePass").val();
+				if(repass!=pass){
+					$("#err_re_pass").show();
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+
+		});
+	</script>
+</head>
+
+<body>
+<div class="container">
+	<div class="jumbotron">
+		<div class="page-header"><h1>Registration form</h1></div><hr>
+	<form class="form-horizontal" method="post" action="#" name="reg" id="reg">
+		<label for="txtName" class="control-label col-sm-2">Name:</label><input type="textbox" name="txtName" id="txtName" class="form-control col-sm-10">
+		<p id="err_name"  style="color:red;">Invalid name</p>
+
+		<label for="txtEmail" class="control-label col-sm-2">Email:</label><input type="email" name="txtEmail" id="txtEmail" class="form-control col-sm-10">
+		<p id="err_email" style="color:red;">email error</p>
+		
+		<label for="txtPass" class="control-label col-sm-2">Password:</label><input type="password" name="txtPass" id="txtPass" class="form-control col-sm-10">
+		<p id="err_pass" style="color:red;">password error</p>
+		
+		<label for="txtrePass" class="control-label col-sm-2">RePassword:</label><input type="password" name="txtrePass" id="txtrePass" class="form-control col-sm-10">
+		<p id="err_re_pass" style="color:red;">password not matching</p>
+		<br>
+		
+		<input type="submit" name="sbmt" value="submit" class="btn btn-success">
+	</form>
+	</div>
+</div>
+
+</body>
+</html>
